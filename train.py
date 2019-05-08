@@ -161,7 +161,7 @@ def main():
                     generate_samples()
 
                 batch = [
-                    data_sampler.sample(1024) for _ in range(args.batch_size)
+                    data_sampler.sample(128) for _ in range(args.batch_size)
                 ]
 
                 _, lv, sm = sess.run((opt, loss, summaries),
