@@ -1,7 +1,7 @@
 FROM tensorflow/tensorflow:1.12.0-py3
 
 ENV LANG=C.UTF-8
-RUN mkdir /gpt-2 
+RUN mkdir /gpt-2
 WORKDIR /gpt-2
 COPY containers/gpt-2/requirements.txt containers/gpt-2/download_data.sh /gpt-2/
 RUN apt-get update && \

@@ -5,3 +5,4 @@ bottle>=0.12.16
 requests>=2.21.0
 flask>=1.0.2
 flask_restful>=0.3.7
+toposort==1.5
