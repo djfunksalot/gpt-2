@@ -12,6 +12,12 @@ import tqdm
 import pprint
 from tensorflow.core.protobuf import rewriter_config_pb2
 
+if 'BUCKET_NAME' in os.environ:
+    BUCKET_NAME = 'gs://' + os.environ['BUCKET_NAME']
+else:
+    print("Error: BUCKET_NAME not defined")
+    exit(0)
+
 BUCKET_NAME = 'gs://handey'
 CHECKPOINT_DIR = BUCKET_NAME + '/checkpoint'
 MODELS_DIR = BUCKET_NAME + '/models'
@@ -23,6 +29,9 @@ if 'TPU_ADDRESS' in os.environ:
         devices = session.list_devices()
         print('TPU devices:')
         pprint.pprint(devices)
+else:
+    print("Error: TPU_ADDRESS not defined")
+    exit(0)
 
 
 import model, sample, encoder
@@ -194,11 +203,13 @@ def main():
                            for _ in range(args.val_batch_count)]
 
         counter = 1
+#disable for now
+#       
 #        counter_path = os.path.join(CHECKPOINT_DIR, args.run_name, 'counter')
 #        if os.path.exists(counter_path):
-            # Load the step number if we're resuming a run
-            # Add 1 so we don't immediately try to save again
-#            with open(counter_path, 'r') as fp:
+#            # Load the step number if we're resuming a run
+#            # Add 1 so we don't immediately try to save again
+##            with open(counter_path, 'r') as fp:
 #                counter = int(fp.read()) + 1
 
         def save():
